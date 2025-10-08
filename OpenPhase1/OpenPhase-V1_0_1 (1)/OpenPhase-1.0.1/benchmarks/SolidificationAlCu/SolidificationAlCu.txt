@@ -1,0 +1,25 @@
+Diffusion-controlled directional solidification of Al-Cu alloy (SolidificationAlCu).
+
+The growth of a single dendrite in the process of directional solidification is
+simulated. Material parameters are for an Al - 4.0 at.% Cu alloy:
+
+Melting point of pure Al:                   T_melt  = 933.6 K, 
+Entropy change during solidification:       delta_S = 10^6 J/(m^3 K), 
+Diffusion coefficient of Cu in liquid Al:   D_liquid =  3*10^9 m/s^2.
+
+The linearized phase diagram is used with constant partition coeffcient 
+k = C_solid/C_liquid = 7.14. The liquidus slope is 2.6 K/at %.
+
+A constant temperature gradient in the Z direction, Gz = 1000 K/m, and
+constant cooling rate, dT/dt = -0.4 K/s, are applied resulting in pulling
+velocity V = -(dT/dt) / Gz = 0.0004 m/s.
+
+The box size is (Nx*Ny*Nz) 71x71x301 grid points, the grid spacing 
+dx = 1*10^{-6} m and the time step dt = 5*10^{-5} s. 
+
+The simulation box starts to move along with the growth of the dendrite when 
+the dendrite tip reaches Nz/3 grid point.
+
+After an initial transient, a single finger of a steady shape growing with a
+constant velocity (equal to the pulling velocity) should be obtained.
+

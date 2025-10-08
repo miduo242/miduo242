@@ -1,0 +1,7 @@
+Mg-Al solidification with buoyancy flow example.
+
+A spherical solid grain of phase 1 surrounded by the liquid phase 0 is considered.
+The solid grain is placed in the center of a square box with periodic boundary 
+conditions. Buoyancy flow is simulated using the lattice Boltzmann method.
+
+The box size is 101x1x101 grid points.

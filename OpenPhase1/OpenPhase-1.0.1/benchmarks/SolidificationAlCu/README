@@ -1,0 +1,10 @@
+This is a README file for the SolidificationAlCu benchmark.
+
+In order to run the benchmark run ./SolidificationAlCu. 
+ProjectInput.opi file contains the necessary input for the simulation. 
+Results will be placed in the ./VTK directory and can be visualised 
+using the ParaView (www.paraview.org).
+
+A detailed description of the simulation setup is given in the 
+SolidificationAlCu.txt file.  
+

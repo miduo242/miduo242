@@ -1,0 +1,7 @@
+This is a README file for the EutecticII simulation example.
+
+In order to run the example simulation run ./EutecticII. 
+ProjectInput.opi file contains the necessary input data for the simulation. 
+Results will be placed in to the /VTK directory and can be visualised 
+using ParaView (www.paraview.org).
+

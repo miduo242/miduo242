@@ -1,0 +1,321 @@
+This file is part of the OpenPhase (R) software library.
+
+Copyright (c) 2009-2020 Ruhr-Universitaet Bochum,
+              Universitaetsstrasse 150, D-44801 Bochum, Germany
+          AND 2018-2020 OpenPhase Solutions GmbH,
+              Wasserstrasse 494, D-44795 Bochum, Germany.
+
+All rights reserved.
+
+
+DEVELOPMENT VERSION, DO NOT PUBLISH OR DISTRIBUTE.
+
+
+OpenPhase (R) is a joint development of Interdisciplinary Centre for 
+Advanced Materials Simulation (ICAMS), Ruhr University Bochum
+and OpenPhase Solutions GmbH.
+
+File created :  2021
+Main contributors : Oleg Shchyglo, Hesham Salama
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@RunTimeControl
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$SimTtl         Simulation Title                            : Martensite C=0.1 wt.%
+$nSteps         Number of Time Steps                        : 100000
+$FTime          Output frequency to disk (in tSteps)        : 100
+$STime          Output frequency to screen (in tSteps)      : 100
+$dt             Initial Time Step                           : 1e-3
+$nOMP           Number of OpenMP Threads                    : 10
+$Restrt         Restart switch (Yes/No)                     : No
+$tStart         Restart at time step                        : 0
+$tRstrt         Restart output every (tSteps)               : 10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Nx             System size in X direction                  : 64
+$Ny             System size in Y direction                  : 64
+$Nz             System size in Z direction                  : 64
+
+$dx             Grid spacing                                : 1e-7
+$IWidth         Interface width (in grid points)            : 5
+$IStab                                                      : 10
+$Resolution     Simulation resolution                       : Single
+
+$Phase_0        Name of phase 0                             : Austenite
+$Phase_1        Name of phase 1                             : Martensite
+
+$Nvariants_0    Number of symmetry variants of austenite    : 1
+$Nvariants_1    Number of symmetry variants of martensite   : 24
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Nucleation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Allowed_1_0        Allow nucleation of phase 1 in phase 0              : Yes
+$Density_1_0        Particle Density of phase 1 in phase 0 (in 1/m^3)   : 0.75e+18
+$Distribution_1_0   Nuclei size distribution                            : Normal
+$Center_1_0         Mu of the Normal SizeDistribution (in m)            : 5.0e-8
+$Deviation_1_0      Sigma of the SizeDistribution (in m)                : 5.0e-8
+$Tmin_1_0           Minimum temperature where nucleation is possible    : 0
+$Tmax_1_0           Maximum temperature where nucleation is possible    : 1000
+$Orientation_1_0    Grains orientation mode                             : Parent
+$Variants_1_0       Crystallographic variants per nucleation site       : 1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@BoundaryConditions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$BC0X    X axis beginning boundary condition  :    Periodic
+$BCNX    X axis far end boundary condition    :    Periodic
+$BC0Y    Y axis beginning boundary condition  :    Periodic
+$BCNY    Y axis far end boundary condition    :    Periodic
+$BC0Z    Z axis beginning boundary condition  :    Periodic
+$BCNZ    Z axis far end boundary condition    :    Periodic
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@DrivingForce
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Average          Driving force averaging     : Yes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@ElasticProperties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$BCX    Mixed Mode X:  FreeBoundaries
+$BCY    Mixed Mode Y:  FreeBoundaries
+$BCZ    Mixed Mode Z:  FreeBoundaries
+
+$BCXY   Boundary condition in XY direction :  FreeBoundaries
+$BCXZ   Boundary condition in XZ direction :  FreeBoundaries
+$BCYZ   Boundary condition in YZ direction :  FreeBoundaries
+
+$BCValueX   Mixed Value X   : 0
+$BCValueY   Mixed Value Y   : 0
+$BCValueZ   Mixed Value Z   : 0
+
+$BCValueXY   Mixed Value XY   : 0.0
+$BCValueXZ   Mixed Value XZ   : 0.0
+$BCValueYZ   Mixed Value YZ   : 0.0
+
+$ChemoMechanicalCoupling    Enable chemo-mechanical coupling   : No
+$ThermoMechanicalCoupling   Enable thermo-mechanical coupling  : No
+
+$EModel Elasticity model : Khachaturyan
+$SMode  Strain mode      : GreenLagrange
+
+$Restrict                   : AspectRatio
+
+$C_0 : 
+237e9 117e9 117e9     0     0     0
+117e9 237e9 117e9     0     0     0
+117e9 117e9 237e9     0     0     0
+    0     0     0  60e9     0     0
+    0     0     0     0  60e9     0
+    0     0     0     0     0  60e9
+
+$U_0 :
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+$C11_1 : 180e9
+$C22_1 : 180e9
+$C33_1 : 222e9
+$C12_1 : 112e9
+$C13_1 : 112e9
+$C23_1 : 112e9
+$C44_1 : 93.7e9
+$C55_1 : 93.7e9
+$C66_1 : 93.7e9
+
+$U_1 :
+1.132 0.0 0.0 
+0.0 1.132 0.0 
+0.0 0.0 0.797
+
+$NeuberCorrection_0   Enable Neuber correction for austenite   : Yes
+$YoungsModulus_0      Young's modulus of austenite             : 160e9
+$YieldStrength_0      Yield stength of austenite               : 156e6
+$Hardening_0          Hardening prefactor of austenite         : 7
+$NeuberCorrection_1   Enable Neuber correction for martensite  : Yes
+$YoungsModulus_1      Young's modulus of martensite            : 200e9
+$YieldStrength_1      Yield stength of martensite              : 900e6
+$Hardening_1          Hardening prefactor of martensite        : 7
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InterfaceProperties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$CurvatureFactor                        : 1.0
+$TripleJunctionFactor                   : 1.0
+
+$MobilityModel_0_0                      : Iso 
+$Mu_0_0      Interface mobility   00    : 1.0e-13
+$MobilityModel_0_1                      : Iso
+$Mu_0_1      Interface mobility   01    : 1.0e-13
+$MobilityModel_1_1                      : Iso
+$Mu_1_1      Interface mobility   11    : 1.0e-13
+
+$EnergyModel_0_0                      : Iso
+$Sigma_0_0  Interface energy      00  : 0.5
+$EnergyModel_0_1                      : Iso
+$Sigma_0_1  Interface energy      01  : 0.5
+$EnergyModel_1_1                      : Iso
+$Sigma_1_1  Interface energy      11  : 0.5
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@UserDrivingForce
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$UDF_Mode_0_1        Driving force mode for phase pair 0 and 1      : Formula
+$UDF_LatentHeat_0_1  Latent heat for phase pair 0 and 1             : 9.03e8
+$UDF_Teq_0_1         Equilibrium temperature for phase pair 0 and 1 : 990
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@SymmetryVariants
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$V_0_0  :
+1 0 0
+0 1 0
+0 0 1
+
+$V_1_0  :
+1 0 0
+0 1 0
+0 0 1
+
+$V_1_1  :
+0 0 -1
+0 -1 0
+-1 0 0
+
+$V_1_2  :
+0 0 1
+1 0 0
+0 1 0
+
+$V_1_3  :
+-1 0 0
+0 0 -1
+0 -1 0
+
+$V_1_4  :
+0 1 0
+0 0 1
+1 0 0
+
+$V_1_5  :
+0 -1 0
+-1 0 0
+0 0 -1
+
+$V_1_6  :
+0 0 -1
+0 1 0
+1 0 0
+
+$V_1_7  :
+1 0 0
+0 -1 0
+0 0 -1
+
+$V_1_8  :
+-1 0 0
+0 0 1
+0 1 0
+
+$V_1_9  :
+0 0 1
+-1 0 0
+0 -1 0
+
+$V_1_10  :
+0 -1 0
+1 0 0
+0 0 1
+
+$V_1_11  :
+0 1 0
+0 0 -1
+-1 0 0
+
+$V_1_12  :
+0 0 1
+0 -1 0
+1 0 0
+
+$V_1_13  :
+-1 0 0
+ 0 1 0
+0 0 -1
+
+$V_1_14  :
+1 0 0
+0 0 -1
+0 1 0
+
+$V_1_15  :
+0 0 -1
+1 0 0 
+0 -1 0
+
+$V_1_16  :
+0 1 0
+-1 0 0
+0 0 1
+
+$V_1_17  :
+0 -1 0
+0 0 1
+-1 0 0
+
+$V_1_18  :
+0 0 1
+0 1 0
+-1 0 0
+
+$V_1_19  :
+-1 0 0
+0 -1 0
+0 0 1
+
+$V_1_20  :
+1 0 0
+0 0 1
+0 -1 0
+
+$V_1_21  :
+0 0 -1
+-1 0 0
+0 1 0
+
+$V_1_22  :
+0 1 0
+1 0 0
+0 0 -1
+
+$V_1_23  :
+0 -1 0
+0 0 -1
+1 0 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Temperature
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$T0     Initial System Temperature                                      : 900.0
+$DT_Dt  Cooling(-) or heating(+) rate                                   : -100.0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Crystallography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$CrystalSymmetry    CrystalSymmetry     : CUBIC
+

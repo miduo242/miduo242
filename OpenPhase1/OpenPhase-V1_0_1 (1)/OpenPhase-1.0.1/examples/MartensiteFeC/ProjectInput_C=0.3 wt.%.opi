@@ -1,0 +1,314 @@
+Standard Open Phase Input File
+!!!All values in MKS (or properly scaled) units please!!!
+
+@RunTimeControl
+
+$SimTtl         Simulation Title                        : Martensite C=0.3 wt.%
+$nSteps         Number of Time Steps                    : 1000000
+$FTime          Output frequency to disk (in tSteps)    : 100
+$STime          Output frequency to screen (in tSteps)  : 100
+$dt             Initial Time Step                       : 5e-4
+$LUnits         Units of length                         : m
+$TUnits         Units of time                           : s
+$MUnits         Units of mass                           : kg
+$EUnits         Energy units                            : J
+$nOMP           Number of OpenMP Threads                : 1
+$Restrt         Restart switch (Yes/No)                 : No
+$tStart         Restart at time step                    : 0
+$tRstrt         Restart output every (tSteps)           : 1000
+
+@Settings
+
+$Nx             System size in X direction              : 128
+$Ny             System size in Y direction              : 128
+$Nz             System size in Z direction              : 128
+$dx             Grid spacing                            : 1e-7
+$IWidth         Interface Width (in grid points)        : 5.0
+$IStab          Interface stabilization parameter       : 10.0
+Resolution     Simulation resolution                   : Double
+
+$Phase_0        Name of phase 0                         : Austenite
+$State_0        Aggregate state of phase 0              : Solid
+$Phase_1        Name of phase 1                         : Martensite
+$State_1        Aggregate state of phase 1              : Solid
+
+$Nvariants_0 : 1
+$Nvariants_1 : 24
+
+@Nucleation
+
+$Allowed_0_0    Allow nucleation of phase 0 in itself   : No
+$Allowed_0_1    Allow nucleation of phase 0 in phase 1  : No
+$Allowed_1_0    Allow nucleation of phase 1 in phase 0  : Yes
+$Allowed_1_1    Allow nucleation of phase 1 in itself   : No
+
+$Density_1_0        Particle Density of phase 1 in phase 0 (in 1/m^3)   : 0.75e+18
+$Distribution_1_0   Nuclei size distribution                            : Normal
+$Center_1_0         Mu of the Normal SizeDistribution (in m)            : 5.0e-8
+$Deviation_1_0      Sigma of the SizeDistribution (in m)                : 5.0e-8
+$Tmin_1_0           Minimum temperature where nucleation is possible    : 0
+$Tmax_1_0           Maximum temperature where nucleation is possible    : 1000
+$Orientation_1_0    Grains orientation mode                             : Parent
+$Variants_1_0       Crystallographic variants per nucleation site       : 1
+
+@BoundaryConditions
+
+$BC0X    X axis beginning boundary condition  :    Periodic
+$BCNX    X axis far end boundary condition    :    Periodic
+
+$BC0Y    Y axis beginning boundary condition  :    Periodic
+$BCNY    Y axis far end boundary condition    :    Periodic
+
+$BC0Z    Z axis beginning boundary condition  :    Periodic
+$BCNZ    Z axis far end boundary condition    :    Periodic
+
+
+@DrivingForce
+
+$Average          Driving force averaging     : Yes
+$CutOff_0_1       Driving force cutoff        : 0.95
+
+
+@ElasticProperties
+
+Mechanical boundary conditions:
+AppliedStrain
+AppliedStrainRate
+AppliedStress
+FreeBoundaries
+
+$BCX    Mixed Mode X:  FreeBoundaries
+$BCY    Mixed Mode Y:  FreeBoundaries
+$BCZ    Mixed Mode Z:  FreeBoundaries
+
+$BCXY   Boundary condition in XY direction :  FreeBoundaries
+$BCXZ   Boundary condition in XZ direction :  FreeBoundaries
+$BCYZ   Boundary condition in YZ direction :  FreeBoundaries
+
+$BCValueX   Mixed Value X   : 0
+$BCValueY   Mixed Value Y   : 0
+$BCValueZ   Mixed Value Z   : 0
+
+$BCValueXY   Mixed Value XY   : 0.0
+$BCValueXZ   Mixed Value XZ   : 0.0
+$BCValueYZ   Mixed Value YZ   : 0.0
+
+Possible restrictions:
+AspectRatio
+Shear
+
+$Restrict                   : AspectRatio
+Restrict                   : Shear
+
+$ChemoMechanicalCoupling                      : No
+$ThermoMechanicalCoupling                     : No
+
+$Comp_0     Name of the component       : NN
+
+$CREF_NN_0      Reference concentration     : 0
+$CREF_NN_1      Reference concentration     : 0
+
+$EModel Elasticity model : Khachaturyan
+$SMode  Strain mode      : GreenLagrange
+
+$C11_0 : 237e9
+$C22_0 : 237e9
+$C33_0 : 237e9
+$C12_0 : 117e9
+$C13_0 : 117e9
+$C23_0 : 117e9
+$C44_0 : 60e9
+$C55_0 : 60e9
+$C66_0 : 60e9
+ 
+$U_0 :
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+ 
+$C11_1 : 186e9
+$C22_1 : 186e9
+$C33_1 : 230e9
+$C12_1 : 116e9
+$C13_1 : 116e9
+$C23_1 : 116e9
+$C44_1 : 96e9
+$C55_1 : 96e9
+$C66_1 : 96e9
+
+$U_1 :
+1.1395 0.0 0.0
+0.0 1.1395 0.0
+0.0 0.0 0.7947
+
+
+$NeuberCorrection_0   Enable Neuber correction for austenite   : Yes
+$YoungsModulus_0      Young's modulus of austenite             : 160e9
+$YieldStrength_0      Yield stength of austenite               : 210e6
+$Hardening_0          Hardening prefactor of austenite         : 7
+
+$NeuberCorrection_1   Enable Neuber correction for martensite  : Yes
+$YoungsModulus_1      Young's modulus of martensite            : 200e9
+$YieldStrength_1      Yield stength of martensite              : 1300e6
+$Hardening_1          Hardening prefactor of martensite        : 7
+
+
+@InterfaceProperties
+
+$MobilityModel_0_0                      : Iso 
+$Mu_0_0      Interface mobility   00    : 1.0e-13
+$MobilityModel_0_1                      : Iso
+$Mu_0_1      Interface mobility   01    : 1.0e-13
+$MobilityModel_1_1                      : Iso
+$Mu_1_1      Interface mobility   11    : 1.0e-13
+
+$EnergyModel_0_0                      : Iso
+$Sigma_0_0  Interface energy      00  : 0.5
+$EnergyModel_0_1                      : Iso
+$Sigma_0_1  Interface energy      01  : 0.5
+$EnergyModel_1_1                      : Iso
+$Sigma_1_1  Interface energy      11  : 0.5
+
+$TripleJunctionFactor                 : 1.0
+$CurvatureFactor                      : 1.0
+
+@UserDrivingForce
+
+$UDF_Mode_0_1        Driving force mode for phase pair 0 and 1      : Formula
+$UDF_LatentHeat_0_1  Latent heat for phase pair 0 and 1             : 8.71e8
+$UDF_Teq_0_1         Equilibrium temperature for phase pair 0 and 1 : 912
+
+@SymmetryVariants
+
+$Nvariants_0 : 1
+$V_0_0
+1 0 0
+0 1 0
+0 0 1
+
+$Nvariants_1 : 24
+$V_1_0
+1 0 0 
+0 1 0 
+0 0 1
+
+$V_1_1 
+0 0 -1 
+0 -1 0
+-1 0 0
+
+$V_1_2 
+0 0 1
+1 0 0
+0 1 0
+
+$V_1_3 
+-1 0 0
+0 0 -1
+0 -1 0
+
+$V_1_4 
+0 1 0
+0 0 1
+1 0 0
+
+$V_1_5 
+0 -1 0
+-1 0 0 
+0 0 -1
+
+$V_1_6 
+0 0 -1 
+0 1 0 
+1 0 0
+
+$V_1_7 
+1 0 0 
+0 -1 0 
+0 0 -1
+
+$V_1_8 
+-1 0 0 
+0 0 1 
+0 1 0
+
+$V_1_9 
+0 0 1 
+-1 0 0 
+0 -1 0
+
+$V_1_10 
+0 -1 0 
+1 0 0 
+0 0 1
+
+$V_1_11 
+0 1 0 
+0 0 -1 
+-1 0 0
+
+$V_1_12 
+0 0 1 
+0 -1 0 
+1 0 0
+
+$V_1_13 
+-1 0 0
+ 0 1 0 
+0 0 -1
+
+$V_1_14 
+1 0 0 
+0 0 -1 
+0 1 0
+
+$V_1_15 
+0 0 -1 
+1 0 0 
+0 -1 0
+
+$V_1_16 
+0 1 0 
+-1 0 0 
+0 0 1
+
+$V_1_17 
+0 -1 0 
+0 0 1 
+-1 0 0
+
+$V_1_18 
+0 0 1 
+0 1 0 
+-1 0 0
+
+$V_1_19 
+-1 0 0 
+0 -1 0 
+0 0 1
+
+$V_1_20 
+1 0 0 
+0 0 1 
+0 -1 0
+
+$V_1_21 
+0 0 -1 
+-1 0 0 
+0 1 0
+
+$V_1_22 
+0 1 0 
+1 0 0 
+0 0 -1
+
+$V_1_23 
+0 -1 0 
+0 0 -1 
+1 0 0
+
+
+@Temperature
+
+$T0     Initial System Temperature          : 860.0
+$DT_Dt  Cooling(-) or heating(+) rate       : -100.0

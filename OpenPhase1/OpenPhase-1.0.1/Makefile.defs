@@ -1,0 +1,122 @@
+#   This file is part of the OpenPhase (R) software library.
+#
+#   Copyright (c) 2009-2022 Ruhr-Universitaet Bochum,
+#                 Universitaetsstrasse 150, D-44801 Bochum, Germany
+#             AND 2018-2022 OpenPhase Solutions GmbH,
+#                 Universitaetsstrasse 136, D-44799 Bochum, Germany.
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#   
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Makefile definitions for OpenPhase project.
+
+MAKE := make SETTINGS="$(SETTINGS)"
+
+OBJDIR = /obj
+LIBDIR = /lib
+LIBPHASE = OpenPhase
+
+ifneq ($(CXX),)
+    CXX = g++
+endif
+
+CXXFLAGS = -fopenmp -Wall -fPIC -std=c++17 
+STDLIBS = -lfftw3_omp -lfftw3 -lgomp -lm -lstdc++ -ldl
+
+COMPVER = $(shell $(CXX) -dumpversion)
+ifneq ($(findstring debug, $(SETTINGS)),)
+    CXXFLAGS += -Og -g -DDEBUG -Wextra
+else
+    CXXFLAGS += -O3 -DNDEBUG
+endif
+ifneq ($(findstring silent, $(SETTINGS)),)
+    CXXFLAGS += -DSILENT
+endif
+ifneq ($(findstring serial, $(SETTINGS)),)
+    CXXFLAGS += -DSERIAL
+    CXXFLAGS := $(filter-out -fopenmp, $(CXXFLAGS))
+    CXXFLAGS += -Wno-unknown-pragmas
+endif
+ifneq ($(findstring H5, $(SETTINGS)),)
+    CXXFLAGS += -DH5OP
+    RUNPATH  += -Wl,-rpath='$$ORIGIN/../../hdf5/hdf5/lib'
+endif
+ifneq ($(findstring mpi-parallel, $(SETTINGS)),)
+    CXX       = mpicxx
+    OBJDIR    = /objmpi
+    LIBPHASE  = OpenPhaseMPI
+    STDLIBS  := -lfftw3_mpi $(STDLIBS)
+    CXXFLAGS += -DMPI_PARALLEL
+endif
+ifneq ($(findstring gpu, $(SETTINGS)),)
+    CXX       = clang++
+    CXXFLAGS += -DGPU
+    OBJDIR    = /objgpu
+    LIBNAME   = lib$(LIBPHASE)GPU.a
+endif
+ifneq ($(findstring generic, $(SETTINGS)),)
+    CXXFLAGS += -march=x86-64 -mtune=generic
+else
+	CXXFLAGS += -march=native -mtune=native
+endif
+ifneq ($(findstring shared, $(SETTINGS)),)
+    LIBNAME = lib$(LIBPHASE).so
+    CXXFLAGS += -fPIC
+    RUNPATH += -Wl,-rpath='$$ORIGIN/../../lib' -Wl,-z,origin
+else
+    LIBNAME = lib$(LIBPHASE).a
+endif
+LIBSOP  = -l$(LIBPHASE)
+
+ifneq ($(findstring DH5OP, $(CXXFLAGS)),)
+    INCLUDES +=  -I$(DEPTH)/HighFive/include/highfive -I$(DEPTH)/hdf5/hdf5/include
+    LDFLAGS += -L$(DEPTH)/hdf5/hdf5/lib
+    LIBSOP += $(DEPTH)/hdf5/hdf5/lib/libhdf5.so
+endif
+
+ifneq ($(findstring DH5OP, $(CXXFLAGS)),)
+    INCLUDES +=  -I$(DEPTH)/HighFive/include/highfive -I$(DEPTH)/hdf5/hdf5/include
+    STDLIBS += -L$(DEPTH)/hdf5/hdf5/lib
+    STDLIBS += $(DEPTH)/hdf5/hdf5/lib/libhdf5.so -Wl,-rpath='$$ORIGIN' -Wl,-z,origin
+    STDLIBS2 += $(DEPTH)/hdf5/hdf5/lib/libhdf5.so -Wl,-rpath='$$ORIGIN' -Wl,-z,origin
+endif
+
+AROPTIONS = -rv
+SOOPTIONS = -shared -fPIC -g
+
+# Timer
+COMPILE_START_TIME := $(shell date +\(%j\*24\*60\*60+%H\*60\*60+%M\*60+%S\))
+COMPILE_CURRENT_TIME = `date  +\(%j\*24\*60\*60+%H\*60\*60+%M\*60+%S\)`
+
+define print_header
+@echo "---------------------------------"
+@echo "Compiling OpenPhase..."
+@echo "Start: " $(shell date)
+@echo "Compiler: " $(CXX) $(COMPVER)
+@echo "Settings: " $(SETTINGS)
+@echo "CXXFLAGS: " $(CXXFLAGS)
+@echo "Mode: $(1)"
+@echo "---------------------------------"
+endef
+
+define print_ending
+@echo "---------------------------------"
+@echo "End: " $(shell date)
+@CT=$(1) && \
+printf "Compilation total time: %.2d:%.2d (min:sec)" \
+`echo "($$CT - $(2))/60" | bc` \
+`echo "($$CT - $(2))%60" | bc`
+@echo ""
+@echo "Compilation done."
+@echo "---------------------------------"
+endef

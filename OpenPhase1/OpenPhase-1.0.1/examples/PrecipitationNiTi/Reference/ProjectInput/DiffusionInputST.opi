@@ -1,0 +1,47 @@
+Standard Open Phase Input File
+!!!All values in MKS (or properly scaled) units please!!!
+
+General Input Parameters:
+$Comp_0   Name of the component               : Ni
+$Cs_01  Intersection Concentration          : 57.1
+$Ts_01  Intersection Temperature 01         : 4323
+
+$ML_01  Liquidus Slope                      : 500
+$ML_10  Solidus Slope      	                : 0
+
+$DC_0  Diffusion Coefficient of Liquid      : 6.0e-19
+$DC_1  Diffusion Coefficient of Solid       : 0.0
+
+$AE_0  Diffusion activation energy of Liquid: 0.0
+$AE_1  Diffusion activation energy of Solid : 0.0
+
+$EF_0  Entropy of Fusion                    : 0.0
+$EF_1  Entropy of Fusion                    : -8.615e4
+
+$Flag_0 Stoichiometry flag                  : No
+$Flag_1 Stoichiometry flag                  : Yes
+
+$C0_Ni_0  Initial Concentration                : 51
+$C0_Ni_1  Initial Concentration                : 57.1
+
+$Vm_Ni_0  Molar Volume                         : 6.0e-6
+$Vm_Ni_1  Molar Volume                         : 6.0e-6
+
+$CMIN_Ni_0  Lower Phase Concentration Limit    : 46
+$CMAX_Ni_0  Upper Phase Concentration Limit    : 58
+
+$CMIN_Ni_1  Lower Phase Concentration Limit    : 57.1
+$CMAX_Ni_1  Upper Phase Concentration Limit    : 57.1
+
+Temperature input
+
+$R0X    X coordinate of the reference point : 0
+$R0Y    Y coordinate of the reference point : 0
+$R0Z    Z coordinate of the reference point : 0
+
+$DT_DRX X component of the temp. gradient   : 0
+$DT_DRY Y component of the temp. gradient   : 0
+$DT_DRZ Z component of the temp. gradient   : 0
+
+$DT_Dt  Cooling(-) or heating(+) rate       : 0
+

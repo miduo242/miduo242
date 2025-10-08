@@ -1,0 +1,92 @@
+Standard Open Phase Input File
+!!!All values in MKS (or properly scaled) units please!!!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@RunTimeControl
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$SimTtl         Simulation Title                        : Equilibrium Crystal Shape
+$nSteps         Number of Time Steps                    : 2000
+$FTime          Output to disk every (tSteps)           : 100
+$STime          Output to screen every (tSteps)         : 100
+$dt             Initial Time Step                       : 1e-1
+$nOMP           Number of OpenMP Threads                : 10
+$Restrt         Restart switch (Yes/No)                 : No
+$tStart         Restart at time step                    : 0
+$tRstrt         Restart output every (tSteps)           : 10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Nx             System Size in X Direction              : 64
+$Ny             System Size in Y Direction              : 64
+$Nz             System Size in Z Direction              : 64
+$IWidth         Interface Width (in grid points)        : 5
+$dx             Grid Spacing                            : 1e-7
+
+$Phase_0        Name of phase 0                         : Matrix
+$Phase_1        Name of phase 1                         : Sphere
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@BoundaryConditions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Boundary Conditions Input Parameters:
+
+$BC0X   X axis beginning boundary condition  : Periodic
+$BCNX   X axis far end boundary condition    : Periodic
+
+$BC0Y   Y axis beginning boundary condition  : Periodic
+$BCNY   Y axis far end boundary condition    : Periodic
+
+$BC0Z   Z axis beginning boundary condition  : Periodic
+$BCNZ   Z axis far end boundary condition    : Periodic
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@DrivingForce
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Average          Driving force averaging     : Yes
+$CutOff_0_1       Driving force cutoff 0 1    : 0.95
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InterfaceProperties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$CurvatureFactor      : 1.0
+$TripleJunctionFactor : 1.0
+
+$EnergyModel_0_0           Interface energy model         : FACETED
+$FamilyOfFacets_0_0        No of facets                   : 1
+$F_0_0_0                   Family of Facet                : 1 0 0
+$SigmaF_0_0_0              Interface energy               : 0.5
+$EpsilonF_0_0_0            Interface anisotropy           : 0.2
+
+$EnergyModel_0_1           Interface energy model         : FACETED
+$FamilyOfFacets_0_1        No of type of facets           : 1
+$F_0_1_0                   Family of Facets               : 1 0 0
+$SigmaF_0_1_0              Interface energy               : 0.5
+$EpsilonF_0_1_0            Interface anisotropy           : 0.2
+
+$EnergyModel_1_1           Interface energy model         : FACETED
+$FamilyOfFacets_1_1        No of type of facets           : 1
+$F_1_1_0                   Family of Facets               : 1 0 0
+$SigmaF_1_1_0              Interface energy               : 0.5
+$EpsilonF_1_1_0            Interface anisotropy           : 0.2
+
+
+
+$MobilityModel_0_0		   Interface mobility model       : Iso 
+$Mu_0_0      			   Interface mobility   00        : 1.0e-14
+
+$MobilityModel_0_1		   Interface mobility model       : Iso 
+$Mu_0_1      			   Interface mobility   00        : 1.0e-14
+
+$MobilityModel_1_1		   Interface mobility model       : Iso 
+$Mu_1_1      			   Interface mobility   00        : 1.0e-14
+
+
+
+

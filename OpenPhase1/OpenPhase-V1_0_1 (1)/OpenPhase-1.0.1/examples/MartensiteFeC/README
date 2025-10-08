@@ -1,0 +1,22 @@
+This is a README file for the MartensiteFeC example.
+
+To operate this example, follow the following steps:
+
+1- To compile the test example, type in the terminal: $ make
+2- For MPI users, compile using: $ make SETTINGS=mpi-parallel
+3- To run the test simulation run $ ./MartensiteFeC
+4- For MPI users run using: $ mpirun -np <no of cores> ./MartensiteFeC
+5- The ProjectInput.opi file contains the necessary input for the simulation.
+   The default ProjectInput.opi file for the test simulation is using Carbon=0.1 wt.%
+6- If you would like to use different carbon content, rename the corresponding
+   ProjectInput file before using them. The default name used by the simulation
+   is ProjectInput.opi
+7- The results will be placed into the /VTK directory and can be visualised 
+   using the ParaView (www.paraview.org).
+
+A detailed description of the simulation setup is given in 
+"http://dx.doi.org/10.1016/j.actamat.2019.06.036".
+
+Note, that this example is reduced to linear elasticity and is presented 
+to show the simulation setup. The results will be different from those in the
+paper above.

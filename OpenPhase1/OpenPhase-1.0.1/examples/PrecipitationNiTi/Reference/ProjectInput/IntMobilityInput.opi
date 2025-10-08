@@ -1,0 +1,7 @@
+$Mu_01  Interface mobility     : 0.4e-9
+$Eps_01 Interface anisotropy  : 0.5
+$Mu_02  Interface mobility     : 0.2e-9
+$Eps_02 Interface anisotropy  : 0.2
+$Mu_12  Interface mobility     : 0.1e-9
+$Eps_12 Interface anisotropy  : 0.1
+ 

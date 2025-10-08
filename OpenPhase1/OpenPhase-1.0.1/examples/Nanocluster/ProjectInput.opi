@@ -1,0 +1,152 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Standard Open Phase Input File
+!!!All values in MKS (or properly scaled) units please!!!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@RunTimeControl
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$SimTtl   Simulation Title                         : Nanocluster
+$nSteps   Number of Time Steps                     : 200000
+$tRstrt   Restart output every (tSteps)            : 500000
+$FTime    Output Distance to Disk (in tSteps)      : 5000
+$STime    Output Distance to Screen (in tSteps)    : 100
+$dt       Initial Time Step                        : 1.0e-13
+
+$Restrt   Restart switch (Yes/No)                  : No
+$tStart   Restart at time step                     : 0
+
+$nOMP     Number of OpenMP Threads                 : 1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Nx       System Size in X Direction               : 64
+$Ny       System Size in Y Direction               : 0
+$Nz       System Size in Z Direction               : 80
+$dx       Grid Spacing                             : 1.0E-9
+$IWidth   Interface Width (in grid points)         : 8
+$Bcells                                            : 2
+
+$Phase_0  Name of Phase 0                          : Fluid
+$Phase_1  Name of Phase 1                          : Cluster
+$Phase_2  Name of Phase 2                          : Substrate
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@BoundaryConditions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$BC0X     X axis beginning boundary condition      : Periodic
+$BCNX     X axis far end boundary condition        : Periodic
+$BC0Y     Y axis beginning boundary condition      : Periodic
+$BCNY     Y axis far end boundary condition        : Periodic
+$BC0Z     Z axis beginning boundary condition      : Periodic
+$BCNZ     Z axis far end boundary condition        : Periodic
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@ElasticProperties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Mechanical boundary conditions:
+Applied Strain
+Applied Stress
+Free Boundaries
+
+$BCX        Boundary condition in X direction        : Free Boundaries
+$BCY        Boundary condition in Y direction        : Free Boundaries
+$BCZ        Boundary condition in Z direction        : Free Boundaries
+
+$BCValueX   Mixed Value X                            : 0
+$BCValueY   Mixed Value Y                            : 0
+$BCValueZ   Mixed Value Z                            : 0
+
+$EModel     Elasticity model                         : Khachaturyan
+$SMode      Strain mode                              : Small
+
+$K_0   Bulk modulus of atmosphere                    : 1e6
+$G_0   Shear modulus of atmosphere                   : 1e6
+
+$U_0 :
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+$L_1   Lame's first parameter of cluster             : 108e9
+$G_1   Shear modulus of cluster                      :  96e9
+
+$U_1 :
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+$L_2   Lame's first parameter of substrate           : 120e9
+$G_2   Shear modulus of substrate                    :  44e9
+
+$U_2 :
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+$ChemoMechanicalCoupling                             : No
+$ThermoMechanicalCoupling                            : No
+
+!52. M. Catti, Y. Noel, R. Dovesi, J. Phys. Chem. Solids 64, 2183 (2003)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InterfaceProperties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Sigma_0_0  Interface energy     of UHV with UHV    : 0.00000
+$Sigma_0_1  Interface energy     of Cu  with UHV    : 2.02905
+$Sigma_0_2  Interface energy     of ZnO with UHV    : 1.40000
+$Sigma_1_1  Interface energy     of Cu  with Cu     : 0.10000
+$Sigma_1_2  Interface energy     of Cu  with ZnO    : 1.00000
+$Sigma_2_2  Interface energy     of ZnO with ZnO    : 0.00000
+
+$Mu_0_0 : 0
+$Mu_0_1 : 0
+$Mu_0_2 : 0
+$Mu_1_1 : 0
+$Mu_1_2 : 0
+$Mu_2_2 : 0
+
+$AE_0_0 : 0
+$AE_0_1 : 0
+$AE_0_2 : 0
+$AE_1_1 : 0
+$AE_1_2 : 0
+$AE_2_2 : 0
+
+$Eps_0_0    Interface anisotropy of UHV with UHV    : 0.00000
+$Eps_0_1    Interface anisotropy of Cu  with UHV    : 0.00000
+$Eps_0_2    Interface anisotropy of Zn0 with UHV    : 0.00000
+$Eps_1_1    Interface anisotropy of Cu  with Cu     : 0.00000
+$Eps_1_2    Interface anisotropy of Cu  with ZnO    : 0.00000
+$Eps_2_2    Interface anisotropy of ZnO with ZnO    : 0.00000
+
+!Surface energy of Copper from:
+!VITOS, Levente, et al. The surface energy of metals. Surface Science, 1998,i
+! 411. Jg., Nr. 1, S. 186-202.
+
+!Surface energy of ZnO from:
+!MARANA, N. L., et al. Electronic and structural properties of the (1010) and
+!(1120) ZnO surfaces. The Journal of Physical Chemistry A, 2008, 112. Jg., Nr.
+! 38, S. 8958-8963.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InterfaceDiffusion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$iBC     Number of Boundary Cells                  : 1
+$dSR     Double-obstacle smoothness range          : 0.04
+$dIDC_0_0 I-Mobility along the UHV/UHV Interface   : 1.0e-25
+$dIDC_0_1 I-Mobility along the Cu/UHV  Interface   : 1.0e-25
+$dIDC_0_2 I-Mobility along the ZnO/UHV Interface   : 1.0e-25
+$dIDC_1_1 I-Mobility along the Cu/Cu   Interface   : 1.0e-25
+$dIDC_1_2 I-Mobility along the Cu/ZnO  Interface   : 1.0e-25
+$dIDC_2_2 I-Mobility along the ZnO/ZnO Interface   : 1.0e-25

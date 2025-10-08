@@ -1,0 +1,20 @@
+Normal grain growth example (NormalGG)
+
+The simulation domain is populated with a set of grains generated according to 
+the Voronoi algorithm. No thermodynamic driving force is applied to the grain 
+boundaries, thus only the effect of the interface curvature is active during 
+the simulation.
+
+The box size is 100x100x100 grid points. The input parameters are:
+
+Initial number of grains:  200, 
+grid spacing:         dX    = 10^{-6} m, 
+time step:            dt    = 10^{-5} s, 
+interface mobility:   mu    = 4*10^{-7} m^4/(J*s), 
+interface energy:     sigma = 0.24 J/m^2, 
+interface width:      eta   = 5.0*dX.
+
+After the start of the simulation, the grains begin to grow to minimizing the
+interface area. The simulation output data in vtk format is written in the 
+VTK directory and can be directly visualized using the Paraview software
+(www.paraview.org).

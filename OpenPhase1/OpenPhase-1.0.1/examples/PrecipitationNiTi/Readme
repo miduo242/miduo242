@@ -1,0 +1,6 @@
+This is a README file for the Precipitation in NiTi simulation example.
+
+In order to run the example simulation run ./PrecipitationNiTi
+ProjectInput.file contains the necessary input for the simulation.
+Results will be placed into the /VTK directory and can be visualised
+using ParaView (www.paraview.org).

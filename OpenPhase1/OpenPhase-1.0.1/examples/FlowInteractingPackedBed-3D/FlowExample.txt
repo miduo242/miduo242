@@ -1,0 +1,32 @@
+Three dimensional simulation of the interaction of a flow with a packed bed of spherical particles.
+
+An array of spherical cylinders by phase number 1 surrounded by air which enters the box from bottom by phase number  0 is simulated.
+
+The simulation is being executed by MPI Parallel. The numbers of cores used in each directions:
+Number of cores in X Direction:                         Ncx           = 21,
+Number of cores in X Direction:                         Ncy           = 3,
+Number of cores in X Direction:                         Ncz           = 4,
+Total Number of cores used in this simulation:              Np = Ncx*Ncx*Ncx  = 252,
+
+
+The box size is 2160x360x360 grid points. The input parameters are:
+
+Cylinder Diameter:                              D             = 1.0000*10^{-2} m,
+grid spacing:                                   dX            = 8.3636*10^{-5} m,
+time step:                                      dt            = 1.6730*10^{-6} s,
+velocity in x-direction:                        U0X           = 1*10^{-1} m/s,
+velocity in y-direction:                        U0Y           = 0 m/s,
+velocity in z-direction:                        U0Z           = 0 m/s,
+Thermodynamic Pressure at Inlet Boundary:                   Pth0              = 1.0*10^{5} Pa,
+Temperature at Inlet Boundary:                              TBCX0             = 300 K,
+Temperature at Cylinder's surfaces:                         TSphere           = 300 K,
+Atmoic Weight of air:                                   Mw            = 0.03 kg/mol,
+Density of Air at Inlet Boundary calculated from Ideal gas law:     rho               = 1.17197*10^{0} kg/m^3,
+Kinematic viscosity (nu) is computed using Sutherland's law:        nu                = 1.54270*10^{-5} m^2/s,
+Specific Heat Capacity:                         cp                = 1000.0 (j/kg K),
+Prandtl Number (ratio of momentum diffusivity to thermal diffusivity):  Pr = nu/Alpha     = 0.71,
+Thermal Diffusivity (m^2/s):                        Alpha=k/rho*cp,
+Thermal Conductivity by considering Pr constant (w/mK):         k= nu*rho*cp/Pr,
+Reynolds Number(Re):                                    U0X*D/nu          = 65.0567,
+Refrence Temperature(TSphere+TBCX)/2);                      Tref          = 300.0 K,
+Rayleigh number(Ra) at reference Temperature:Pr*g*(TSphere-TBC0X)*(D^3)/(Tref*nuref^2)    = 0.0,

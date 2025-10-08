@@ -1,0 +1,6 @@
+This is a README file for the SolidificationFeC simulation example.
+
+In order to run the example simulation run ./SolidificationFeC
+ProjectInput.opi file contains the necessary input for the simulation. 
+Results will be placed into the /VTK directory and can be visualised 
+using the ParaView (www.paraview.org).

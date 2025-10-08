@@ -1,0 +1,15 @@
+OpenPhase is an open source software library for the phase-field simulations 
+of complex scientific problems. It is written in object-oriented C++ and has
+a modular structure. Each module is dedicated to solve a single problem along
+the phase-field simulation strategy. The brief documentation can be found in
+the /documentation directory.
+
+A quick introduction to the compilation and use of the OpenPhase library is 
+given in the INSTALL file.
+
+CONTACT
+--------
+
+OpenPhase is developed by a group of authors (see AUTHORS).
+The latest version of the OpenPhase library and related information can be 
+found at www.openphase.rub.de.

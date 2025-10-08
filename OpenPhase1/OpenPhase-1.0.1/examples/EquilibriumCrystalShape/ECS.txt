@@ -1,0 +1,30 @@
+Equilibrium Crystal Shape example (ECS)
+
+A simulation of an initially spherical grain inserted in the melt in a 
+simulation box. No thermodynamic driving force is applied to the grain 
+boundaries, thus only the effect of the interface curvature anisotropy 
+is active during the simulation.
+
+The box size is 64x64x64 grid points. The input parameters are:
+
+Initial number of grains:  2, 
+grid spacing:         dX    = 10^{-7} m, 
+time step:            dt    = 10^{-1} s, 
+interface mobility:   mu    = 1*10^{-14} m^4/(J*s), 
+interface energy:     sigma = 0.2 J/m^2, 
+interface anisotropy strength per facet family: k = 0.3, 
+interface width:      eta   = 5*dX.
+
+After the start of the simulation, the grain begin to take its equilibrium
+shape, minimizing the interface curvature by means of the interface energy
+anisotropy as a function of the inclination angles.
+
+The simulation output data in vtk format is written in the VTK directory and 
+can be directly. Visualized using the Paraview software (www.paraview.org).
+
+
+Reference:
+
+# H. Salama, et al. "Role of inclination dependence of grain boundary energy
+on the microstructure evolution during grain growth."
+Acta Materialia 188 (2020): 641-651.
